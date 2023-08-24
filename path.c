@@ -96,4 +96,3 @@ char *find_path(info_t *info, char *path_str, char *cmd)
 }
 	
 
-
