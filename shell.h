@@ -34,12 +34,25 @@
 #define HIST_FILE ".simple_shell_history"
 #define HIST_MAX 4096
 
-#define INFO_INIT \
-{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-	0, 0, 0}
+extern char **environ;
 
 /**
- * struct passinfo - groups the variables of different data types together under struct.
+ * struct liststr - string of singly linked list.
+ * @num: number of strings.
+ * @str: a string.
+ * @next: pointer to the next node.
+ */
+
+typedef struct liststr
+{
+        int num;
+        char *str;
+        struct liststr *next;
+} list_t;
+
+/**
+ * struct passinfo - groups the variables of different data types together
+ * under struct.
  * @fname: file name.
  * @argc: counts arguments.
  * @argv: argument vector.
@@ -62,15 +75,29 @@
 
 typedef struct passinfo
 {
-	int argc, status, env_changed, err_num;
-	int linecount_flag, readfd, histcount,cmd_buf_type;
-	char *fname, *arg, *path;
-	char **argv, **environ, **cmd_buf;
+	int argc;
+	int status;
+	int env_changed;
+	int err_num;
+	int linecount_flag;
+	int readfd;
+	int histcount;
+	int cmd_buf_type;
+	char *fname;
+	char *arg;
+	char *path;
+	char **argv;
+	char **environ;
+	char **cmd_buf;
 	unsigned int line_count;
-}
-info_t;
+	list_t *env;
+	list_t *history;
+	list_t *alias;
+} info_t;
 
-extern char **environ;
+#define INFO_INIT \
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+        0, 0, 0}
 
 /**
  * struct builtin - string for builtin
@@ -81,7 +108,7 @@ extern char **environ;
 typedef struct builtin
 {
 	char *type;
-	int (*func)(info_t*);
+	int (*func)(info_t *);
 }
 builtin_table;
 
@@ -95,7 +122,7 @@ void find_cmd(info_t *);
 void fork_cmd(info_t *);
 void remove_comments(char *);
 void clear_info(info_t *);
-void free_str (char **);
+void free_str(char **);
 void free_info(info_t *, int);
 void *_realloc(void *, unsigned int, unsigned int);
 char *_strcpy(char *, char *);
@@ -110,7 +137,7 @@ char *find_path(info_t *, char *, char *);
 char **get_environ(info_t *);
 char *_getenv(info_t *, const char *);
 char *get_history_file(info_t *info);
-char **strtow(char *, char *);
+char **strtow1(char *, char *);
 char **strtow2(char *, char);
 char *convert_number(long int, int, int);
 char *_memset(char *, char, unsigned int);
@@ -152,19 +179,10 @@ int populate_env_list(info_t *);
 int _myhelp(info_t *);
 int _myexit(info_t *);
 ssize_t get_input(info_t *);
-
-/**
- * struct liststr - string of singly linked list.
- * @num: number of strings.
- * @str: a string.
- * @next: pointer to the next node.
- */
-
-typedef struct liststr
-{
-	int num;
-	char *str;
-	struct liststr *next;
-} list_t;
+void free_list(list_t **);
+list_t *node_starts_with(list_t *, char *, char);
+list_t *add_node(list_t **, const char *, int);
+list_t *add_node_end(list_t **, const char *, int);
+char **list_to_strings(list_t *);
 
 #endif
