@@ -37,11 +37,22 @@
 extern char **environ;
 
 /**
+<<<<<<< HEAD
 * struct liststr - linked list string.
 * @num: number of strings.
 * @str: the string.
 * @next: pointer to the next node.
 */
+=======
+<<<<<<< HEAD
+ * struct passinfo - groups the variables under struct.
+=======
+ * struct liststr - string of singly linked list.
+ * @num: number of strings.
+ * @str: a string.
+ * @next: pointer to the next node.
+ */
+>>>>>>> 652e9d5737ed8080af5c78a799c041bb7d65cc0b
 
 typedef struct liststr
 {
@@ -51,6 +62,7 @@ struct liststr *next;
 } list_t;
 
 /**
+<<<<<<< HEAD
 * struct passinfo - groups pseudo-arguements passed to function.
 * @arg: generated strings of arguements from getline.
 * @argv: array generated from arg.
@@ -92,6 +104,58 @@ char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
 int cmd_buf_type; /* CMD_type ||, &&, ; */
 int readfd;
 int histcount;
+=======
+ * struct passinfo - groups the variables of different data types together
+ * under struct.
+>>>>>>> 5eae8445a28900da613d4a72db40f883b5ae5664
+ * @fname: file name.
+ * @argc: counts arguments.
+ * @argv: argument vector.
+ * @arg: generated string of arguments.
+ * @line_count: counts error lines.
+ * @linecount_flag: flag to control line count.
+ * @alias: alias or alternate node.
+ * @env: environment variables.
+ * @env_changed: to track changing environment variables.
+ * @environ: to modify environment variable.
+ * @readfd: to read from file descriptor.
+ * @cmd_buf: pointer address.
+ * @cmd_buf_type: command type.
+ * @history: creates history.
+ * @histcount: to count history list.
+ * @err_num: error code.
+ * @path: command path.
+ * @status: status of the command executed.
+ */
+
+typedef struct passinfo
+{
+<<<<<<< HEAD
+	int argc, status, env_changed, err_num;
+	int linecount_flag, readfd, histcount, cmd_buf_type;
+	char *fname, *arg, *path;
+	char **argv, **environ, **cmd_buf;
+=======
+	int argc;
+	int status;
+	int env_changed;
+	int err_num;
+	int linecount_flag;
+	int readfd;
+	int histcount;
+	int cmd_buf_type;
+	char *fname;
+	char *arg;
+	char *path;
+	char **argv;
+	char **environ;
+	char **cmd_buf;
+>>>>>>> 5eae8445a28900da613d4a72db40f883b5ae5664
+	unsigned int line_count;
+	list_t *env;
+	list_t *history;
+	list_t *alias;
+>>>>>>> 652e9d5737ed8080af5c78a799c041bb7d65cc0b
 } info_t;
 
 #define INFO_INIT \
