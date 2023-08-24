@@ -11,6 +11,7 @@
 char *_strcpy(char *new, char *old)
 {
 	int n = 0;
+
 	if (new == old || old == 0)
 		return (old);
 	while (old[n])
@@ -56,6 +57,7 @@ char *_strdup(const char *str)
 void _puts(char *str)
 {
 	int s = 0;
+
 	if (!str)
 		return;
 	while (str[s] != '\0')
@@ -76,6 +78,7 @@ int _putchar(char c)
 {
 	static int i;
 	static char buf[WRITE_BUF_SIZE];
+
 	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
 		write(1, buf, i);

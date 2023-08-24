@@ -11,7 +11,8 @@
 int _myexit(info_t *info)
 {
 	int ex;
-	if(info->argv[1]) /* If exit argument exists */
+
+	if (info->argv[1]) /* If exit argument exists */
 	{
 		ex = _erratoi(info->argv[1]);
 		if (ex == -1)
@@ -40,6 +41,7 @@ int _mycd(info_t *info)
 {
 	char *a, *dir, buffer[1024];
 	int chdir_ret;
+
 	a = getcwd(buffer, 1024);
 	if (!a)
 		_puts("TODO: >>getcwd failure emsg here<<\n");
@@ -89,6 +91,7 @@ int _mycd(info_t *info)
 int _myhelp(info_t *info)
 {
 	char **arg_array;
+
 	arg_array = info->argv;
 	_puts("help call works. Function not yet implemented \n");
 	if (0)

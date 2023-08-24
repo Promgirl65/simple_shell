@@ -11,6 +11,7 @@
 char *_memset(char *s, char b, unsigned int n)
 {
 	unsigned int i;
+
 	for (i = 0; i < n; i++)
 		s[i] = b;
 	return (s);
@@ -24,6 +25,7 @@ char *_memset(char *s, char b, unsigned int n)
 void ffree(char **pp)
 {
 	char **c = pp;
+
 	if (!pp)
 		return;
 	while (*pp)
@@ -43,6 +45,7 @@ void ffree(char **pp)
 void *_realloc(void *ptr, unsigned int old, unsigned int new)
 {
 	char *c;
+
 	if (!ptr)
 		return (malloc(new));
 	if (!new)
