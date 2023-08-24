@@ -39,7 +39,7 @@
 	0, 0, 0}
 
 /**
- * struct passinfo - groups the variables of different data types together under struct.
+ * struct passinfo - groups the variables under struct.
  * @fname: file name.
  * @argc: counts arguments.
  * @argv: argument vector.
@@ -63,7 +63,7 @@
 typedef struct passinfo
 {
 	int argc, status, env_changed, err_num;
-	int linecount_flag, readfd, histcount,cmd_buf_type;
+	int linecount_flag, readfd, histcount, cmd_buf_type;
 	char *fname, *arg, *path;
 	char **argv, **environ, **cmd_buf;
 	unsigned int line_count;
@@ -81,7 +81,7 @@ extern char **environ;
 typedef struct builtin
 {
 	char *type;
-	int (*func)(info_t*);
+	int (*func)(info_t *);
 }
 builtin_table;
 
