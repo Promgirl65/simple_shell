@@ -75,15 +75,15 @@ void *_realloc(void *ptr, unsigned int mem_siz1, unsigned int mem_siz2)
 		return (malloc(mem_siz2));
 	}
 	if (mem_siz2 == 0)
-        {
-                return (free(ptr), NULL);
-        }
+	{
+		return (free(ptr), NULL);
+	}
 	if (mem_siz2 == mem_siz1)
-        {
-                return (ptr);
-        }
-
+	{
+		return (ptr);
+	}
 	a = malloc(mem_siz2);
+
 	if (a == 0)
 	{
 		return (NULL);

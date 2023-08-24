@@ -13,6 +13,7 @@ char *dup_char(char *path_str, int beg, int end)
 {
 	static char buf[1024];
 	int i, j;
+
 	i = 0;
 	j = 0;
 
@@ -40,8 +41,9 @@ int exec_cmd(info_t *info, char *path)
 	struct stat st;
 	(void)info;
 	if (path == 0 || stat(path, &st))
-		return 0;
-
+	{
+		return (0);
+	}
 	if (st.st_mode & S_IFREG)
 	{
 		return (1);
@@ -62,6 +64,7 @@ char *find_path(info_t *info, char *path_str, char *cmd)
 {
 	int n, initial;
 	char *path;
+
 	n = 0;
 	initial = 0;
 
@@ -94,5 +97,8 @@ char *find_path(info_t *info, char *path_str, char *cmd)
 	}
 	return (NULL);
 }
+<<<<<<< HEAD
 	
 
+=======
+>>>>>>> 5eae8445a28900da613d4a72db40f883b5ae5664
