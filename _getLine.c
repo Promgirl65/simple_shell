@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
-* input_buf -A buffer chain commands.
+* input_buf -buffers the chain commands.
 * @info:The parameter struct.
 * @buf:The address of buffer.
 * @len:the address of len var.
@@ -112,7 +112,7 @@ return (r);
 * @ptr:the address of the pointer to buffer, preallocated or NULL.
 * @length:the size of preallocated ptr buffer if not NULL.
 *
-* Return: s
+* Return: u
 */
 int _getline(info_t *info, char **ptr, size_t *length)
 {
@@ -123,30 +123,31 @@ ssize_t a = 0, u = 0;
 char *p = NULL, *new_p = NULL, *c;
 p = *ptr;
 if (p && length)
-s = *length;
+u = *length;
 if (i == len)
 i = len = 0;
 
-r = read_buf(info, buf, &len);
-if (r == -1 || (r == 0 && len == 0))
+a = read_buf(info, buf, &len);
+if (a == -1 || (a == 0 && len == 0))
 return (-1);
 c = _strchr(buf + i, '\n');
 k = c ? 1 + (unsigned int)(c - buf) : len;
-new_p = _realloc(p, s, s ? s + k : k + 1);
+new_p = _realloc(p, u, u ? u + k : k + 1);
 if (!new_p) /* MALLOC FAILURE! */
 return (p ? free(p), -1 : -1);
-if (s)
+if (u)
 _strncat(new_p, buf + i, k - i);
 else
 _strncpy(new_p, buf + i, k - i + 1);
-s += k - i;
+u += k - i;
 i = k;
 p = new_p;
 if (length)
-*length = s;
+*length = u;
 *ptr = p;
-return (s);
+return (u);
 }
+
 /**
 * sigintHandler -its blocks ctrl-C
 * @sig_num: signal number
